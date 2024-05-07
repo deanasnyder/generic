@@ -2,15 +2,15 @@
 <html lang='en'>
 <head>
 	<meta charset='utf-8'/>
-	<!-- The above <meta> tag is required, and should be the first element in the <head> element; and it must be within the first 512 bytes of the html file! - this includes even comments, which is why these comments are here and not earlier. If it isn't in the first 512 bytes of the file, the validator will give the error, "A charset attribute on a meta element found after the first 512 bytes.". Plus anything the browser loads before the charset is established will have to be re-loaded after the browser parses the charset attribute, if the browser initially guessed the wrong charset. The HTML5 doctype, <!DOCTYPE html>, triggers standards mode in all modern browsers. It must be the VERY FIRST bytes in the html file; if there is anything before it, even a blank line or a space, it's as if no doctype were declared at all and  some browsers will render the page in quirks mode. The tag <meta content = "text/html"> is no longer required. The "lang" attribute in the <html> tag above defines the default language for every sub-element of this file and should be used because it aids speech synthesis tools in determining pronunciation, and translation tools in determining what rules to use, etc. The preceeding <html> element definition works in all modern browsers. We don't need the old 'xmlns="http..."' root element attribute because all elements in HTML5 are in the XHTML namespace. For the same reason we don't need the 'xml:lang="en"' attribute.-->
+
 	
-	<!-- The title will show up as the first line in search results. And will be scanned for keywords - instead of using the old keywords meta tag. Google search result will only show the first 52 characters before adding an ellipsis.-->
+
 	<title>Dean Snyder's Generic Web App</title>
-	<!-- **************** ONLY LOAD SCRIPTS HERE NOW THAT ARE REQUIRED EARLY ON *************** In general, you should load all scripts at the end of the <body> element (not after it) so they load and compile last. The page will appear to load faster and the DOM will be fully populated before any Javascript code is run. Scripts that need to run earlier, like our 'startup.js' script, need to be loaded in the <head> element. The Google analytics script reference should be near the top of the <head> tag and before any other script or CSS tags. Our 'startup.js' script, which initializes our global namespace, window.A, and Google analytics, and does some other preliminary housekeeping, should be after it. -->
+
 	<script>	
-		// initialize our global namespace, "A"								
+
 		window.A = window.A || {};
-		// get the best timer									
+
 		A.timer = window.performance.now.bind(window.performance);	
 		// get startup time 
 		A.startupTime = A.timer();		
