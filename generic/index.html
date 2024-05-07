@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'/>
+	<!-- The above <meta> tag is required, and should be the first element in the <head> element; and it must be within the first 512 bytes of the html file! - this includes even comments, which is why these comments are here and not earlier. If it isn't in the first 512 bytes of the file, the validator will give the error, "A charset attribute on a meta element found after the first 512 bytes.". Plus anything the browser loads before the charset is established will have to be re-loaded after the browser parses the charset attribute, if the browser initially guessed the wrong charset. The HTML5 doctype, <!DOCTYPE html>, triggers standards mode in all modern browsers. It must be the VERY FIRST bytes in the html file; if there is anything before it, even a blank line or a space, it's as if no doctype were declared at all and  some browsers will render the page in quirks mode. The tag <meta content = "text/html"> is no longer required. The "lang" attribute in the <html> tag above defines the default language for every sub-element of this file and should be used because it aids speech synthesis tools in determining pronunciation, and translation tools in determining what rules to use, etc. The preceeding <html> element definition works in all modern browsers. We don't need the old 'xmlns="http..."' root element attribute because all elements in HTML5 are in the XHTML namespace. For the same reason we don't need the 'xml:lang="en"' attribute.-->
+	
+	<!-- The title will show up as the first line in search results. And will be scanned for keywords - instead of using the old keywords meta tag. Google search result will only show the first 52 characters before adding an ellipsis.-->
+	<title>Dean Snyder's Generic Web App</title>
+	<!-- **************** ONLY LOAD SCRIPTS HERE NOW THAT ARE REQUIRED EARLY ON *************** In general, you should load all scripts at the end of the <body> element (not after it) so they load and compile last. The page will appear to load faster and the DOM will be fully populated before any Javascript code is run. Scripts that need to run earlier, like our 'startup.js' script, need to be loaded in the <head> element. The Google analytics script reference should be near the top of the <head> tag and before any other script or CSS tags. Our 'startup.js' script, which initializes our global namespace, window.A, and Google analytics, and does some other preliminary housekeeping, should be after it. -->
+	<script>	
+		// initialize our global namespace, "A"								
+		window.A = window.A || {};
+		// get the best timer									
+		A.timer = window.performance.now.bind(window.performance);	
+		// get startup time 
+		A.startupTime = A.timer();		
+		// useful to identify app in console	
+		A_name = 'Generic';
+		// make sure we have the console							
+		window.console = window.console || {};	
+		// simplify logging					
+		window.log = console.log;
+		// style console text
+		log('%c"Generic" web app', 'font-size: 16px; font-weight: bold; color: #99f;');
+		// useful for debugging		
+		log(window);	
+	</script>
+	<!-- This description will show up as the descriptive text in search results. It will not be scanned for keywords. Google search will only show at most the first 160 characters before adding an ellipsis. -->
+	<meta name='description' content='Dean Snyder's Generic web app templat supporting support assistive technologies like keyboard manipulation and semantic HTML as an aid to screen readers.'/>
+	<meta name='author' content='Dean A. Snyder'/>
+	<meta name='copyright' content='Copyright &copy; 2024 Dean A. Snyder. All rights reserved.'/>
+	<!-- Specify width for rendering on mobile devices so the HTML page width is not too wide for comfortable viewing of text and images. Optionally, disallow user zooming. The specified width is honored also on Android, but Android users can always zoom. -->
+    <meta name='viewport' content='width = device-width, height = device-height, initial-scale = 1.0, minimum-scale = 0.25, maximum-scale = 8.0, user-scalable = yes'>
+    <!-- Hide mobile Safari URL bar when started from saved-to-desktop icon -->
+	<meta name='apple-mobile-web-app-capable' content='yes'/>			
+    <!-- Load style sheets in the <head> element. The "type='text/css'" attribute is no longer needed because there's only CSS now. Set all HTML elements to our style standards - init.css is my combination of reset.css & normalize.css -->
+	<link rel='stylesheet' href='xtras/init-1.0.css'> 
+	<link rel='stylesheet' href='xtras/menu-main.css'> 
+	<link rel='stylesheet' href='index.css'>
+</head>
+
+<body>	
+<header role='banner'>
+	<h1>Generic Web App</h1>
+	<div id='mainMenuBox'>
+		<button id='mainMenuButton'
+			class='doAnimatedFocus unselectable disableDoubleTapZoom' 
+			aria-haspopup='true' aria-label='Toggle main menu display'>
+			<span></span><span></span><span></span><span></span>
+		</button>
+		<div id='mainMenu' role='menu' aria-labelledby='mainMenuButton'>	
+			<nav id='mainMenuNavigationBox' role='navigation'>
+				<a class='mainMenuItem' role='menuitem' href='#main'
+					aria-label='Go to top of page.'>
+					Top
+				</a>
+			<nav id='mainMenuNavigationBox' role='navigation'>
+				<a class='mainMenuItem' role='menuitem' href='#preliminariesSection'
+					aria-label='Go to preliminary remarks.'>
+					Preliminary Remarks
+				</a>
+				<a class='mainMenuItem' role='menuitem' href='#semanticSection'
+					aria-label='Go to the semantic elements.'>
+					Semantic Elements
+				</a>
+				<a class='mainMenuItem' role='menuitem' href='#readabilitySection'
+					aria-label='Go to the readability.'>
+					Readability
+				</a>                          
+			</nav>
+		
+			<hr/>
+		
+			<div id='mainMenuControlBox'>
+				<label class='mainMenuItemControl mainMenuItemCheckboxLabel unselectable disableDoubleTapZoom'> 
+					<input type='checkbox' id='schemeCheckbox' class='mainMenuItemCheckbox doAnimatedFocus'
+					 role='menuitem' aria-label='Toggle scheme color.' checked>
+					Dark Scheme
+				</label>
+				<button id='showCurrentHTMLBtn' class='mainMenuItemControl mainMenuItemButton' role='menuitem' 
+					aria-label='Button to show current HTML.'>
+					Show Current HTML
+				</button>
+			</div>  	<!-- mainMenuControlBox -->
+		</div>		<!-- mainMenu -->
+	</div> 		<!-- mainMenuBox -->
+</header>
+
+
+<main role='main' id='main'>
+	<div id='contactInfo'>
+		<div>Dean A. Snyder</div>
+		<div><a href='http://studyhebrewandgreek.com' target='_blank'>studyhebrewandgreek.com</a></div>
+		<div>studyhebrewandgreek at gmail dot com</div>
+	</div>
+
+
+	<article>
+	<section id='preliminariesSection'>
+		<h2>Preliminary Remarks<span class='speakOnly'> Section:</span></h2>
+		<p>This web page illustrates several HTML, CSS, and JavaScript techniques I currently like. Here's a partial list:</p>
+		<ul id='introList'>
+			<li>This standalone web app has no external dependencies - all referenced files are included in the project directory.</li>
+			<li>It implements a site-wide, light/dark color scheme strategy.</li>
+			<li>It populates an HTML5-specific head element correctly.</li>
+			<li>It uses a single global variable, "A", that contains all our functions and variables, thereby avoiding pollution of the JavaScript namespace.</li>
+			<li>It gets the browser-specific, best timer for profiling code performance.</li>
+			<li>It configures the mobile viewport for optimal display.</li>
+			<li>Its "init.css" stylesheet initializes CSS styles to the same vanilla state across all browsers by combining techniques of my own with those adapted from "reset.css" and "normalize.css".</li>
+			<li>It uses <a href='http://jquery.com' target='_blank'>jQuery</a> to manipulate the DOM.</li>
+			<li>It uses responsive design techniques to re-configure the page based on screen size.</li>
+			<li>It has a fixed header with a popup menu.</li>
+			<li>It animates scrolling to links on the same page links, compensating for the height of the fixed header.</li>
+			<li>It implements various assistive technologies that computer screen readers use to help visually-impaired users interact with web pages - for example: <a href='#semanticSection'>web page structural elements</a>, <a href='#menuSection'>menus</a>, and <a href='#focusSection'>focus</a>.</li>
+			<li>All links and controls on this page can be manipulated using the keyboard; the mouse is not required.</li>
+			<li>Focus changes are animated so they are more noticeble. (You can traverse the keyboard focusable elements by pressing the tab key.)</li>
+			<li>The automated, modularized footer provides useful site information.</li>
+			<li>The HTML code validates with the <a href='http://validator.w3.org/#validate_by_input' target='_blank'>W3C Markup Validation Service</a>.</li>
+			<li>The CSS code validates with the <a href='http://jigsaw.w3.org/css-validator/#validate_by_input' target='_blank'>W3C CSS Validation Service</a>.</li>
+		</ul>
+	</section>	
+
+
+	<section id='semanticSection'>
+		<h2>Semantic Elements<span class='speakOnly'> Section:</span></h2>
+		<p>We use semantic elements like header, nav, main, article, and section as aids for screen readers, web crawlers, and search engines in analyzing web page structure.</p>
+	</section>
+
+
+	<section id='readabilitySection'>
+		<h2>Readability<span class='speakOnly'> Section:</span></h2>
+		<p>This is just a simple, rough visual indicator for how many characters there are in a line of text. A common number for good readability is between 60 and 75 characters per line.</p>
+		<p>----@---10----@---20----@---30----@---40----@---50----@---60----@---70----@---80----@---90----@----</p>
+	</section>
+	</article> 
+	
+	
+	<footer></footer>
+</main>	
+
+
+<!-- ************************ LOAD SCRIPTS LAST ************************* In general, you should load all scripts at the end of the <body> element (not after it) so they load and compile last. The page will appear to load faster and the DOM will be fully populated before any Javascript code is run. The order of scripts here is important - any script used by another script must be loaded before it. (Any script that needs to run even earlier, like our initialization script, should be loaded in the <head> element.) -->
+<script src='xtras/jquery-3.7.1.min.js'></script>
+<!--<script src='xtras/jquery-migrate-3.4.1.min.js'></script>-->
+<script src='xtras/utilities-1.9.8.js'></script>
+<script src='xtras/menu-manager-1.2.js'></script>
+<script src='xtras/footer-1.5.js'></script>
+<script src='index.js'></script>
+<script>
+	A.app.init();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
